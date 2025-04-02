@@ -33,6 +33,8 @@
                 <h:commandButton value="Delete" action="#{requestsList.deleteRequest()}" />
             </h:column>
         </h:dataTable>
+    </h:form>
+    <h:form>
         <h:outputText value="New request"/>
         <h:inputText id="newReqInputText" value="#{requestsList.newRequest}"/>
         <h:commandButton value="Add" action="#{requestsList.addRequest()}"/>
