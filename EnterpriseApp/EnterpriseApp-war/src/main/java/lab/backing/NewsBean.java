@@ -7,6 +7,7 @@ import jakarta.inject.Named;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 import jakarta.jms.ObjectMessage;
+import jakarta.jms.TextMessage;
 import lab.ejb.NewsItem;
 import lab.ejb.NewsItemFacadeLocal;
 
@@ -30,11 +31,14 @@ public class NewsBean {
 
     void sendNewsItem(String heading, String body) {
         try {
-            ObjectMessage message = context.createObjectMessage();
-            NewsItem e = new NewsItem();
-            e.setHeading(heading);
-            e.setBody(body);
-            message.setObject(e);
+//            ObjectMessage message = context.createObjectMessage();
+//            NewsItem e = new NewsItem();
+//            e.setHeading(heading);
+//            e.setBody(body);
+//            message.setObject(e);
+            TextMessage message = context.createTextMessage();
+            String msg = heading+"|"+body;
+            message.setText(msg);
             context.createProducer().send(queue, message);
         } catch (JMSException ex) {
             ex.printStackTrace();
